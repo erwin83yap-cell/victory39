@@ -84,56 +84,40 @@
             }
         }
 
-        /* Super Visible & Stunning Animated Neon Border for Top Banner */
+        /* Sleek, Elegant, and Subtle Top Banner (Not Overly Flashy) */
         .top-banner {
             position: relative;
-            background: rgba(8, 14, 28, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 12px 0;
-            font-size: 13px;
-            font-weight: 700;
+            background: linear-gradient(90deg, rgba(8, 14, 28, 0.75), rgba(15, 23, 42, 0.85), rgba(8, 14, 28, 0.75));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #cbd5e1;
+            padding: 8px 0;
+            font-size: 12px;
+            font-weight: 500;
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
-            letter-spacing: 1px;
-            border-top: 3px solid #00d2ff;
-            border-bottom: 3px solid #00d2ff;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8), inset 0 0 15px rgba(0, 210, 255, 0.4);
-        }
-
-        .top-banner::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -100%;
-            width: 300%;
-            height: calc(100% + 4px);
-            background: linear-gradient(90deg, transparent, rgba(0,210,255,1), #ff007f, #00ffcc, rgba(0,210,255,1), transparent);
-            animation: borderLightMove 3s linear infinite;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.9;
-        }
-
-        @keyframes borderLightMove {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(50%); }
+            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(0, 210, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 25s linear infinite;
+            animation: marquee 30s linear infinite;
             position: relative;
             z-index: 2;
         }
 
         .marquee-content span {
-            margin-right: 50px;
-            background: linear-gradient(135deg, #00d2ff, #ffffff, #ff7eee);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
+            margin-right: 60px;
+            color: #e2e8f0;
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+        }
+
+        .marquee-content span strong {
+            color: var(--primary-blue);
         }
 
         @keyframes marquee {
@@ -430,10 +414,10 @@
     <div class="bg-image-layer"></div>
     <div class="bg-particles-container" id="particleContainer"></div>
 
-    <!-- Top Running Marquee Banner with Highly Visible Animated Neon Border -->
+    <!-- Sleek & Balanced Top Running Marquee Banner -->
     <div class="top-banner">
         <div class="marquee-content">
-            <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
+            <span>⭐ SELAMAT DATANG DI <strong>VICTORY39</strong> - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
             <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIAP HARI! 🚀</span>
         </div>
     </div>
