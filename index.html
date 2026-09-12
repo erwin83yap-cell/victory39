@@ -12,9 +12,9 @@
         :root {
             --primary-blue: #00d2ff;
             --secondary-blue: #3a7bd5;
-            --dark-bg: #0a0f1d;
-            --card-bg: rgba(13, 20, 38, 0.9);
-            --border-glow: rgba(0, 210, 255, 0.4);
+            --dark-bg: #070b14;
+            --card-bg: rgba(11, 17, 32, 0.92);
+            --border-glow: rgba(0, 210, 255, 0.45);
             --text-color: #ffffff;
             --text-muted: #94a3b8;
         }
@@ -34,62 +34,80 @@
             position: relative;
         }
 
-        /* Animated Background with panning/zooming motion */
-        .bg-glow {
+        /* Dynamic Blue Glowing Orbs & Particles Background Animation */
+        .bg-animation-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('background.webp') no-repeat center center/cover;
-            opacity: 0.35;
             z-index: -2;
-            filter: brightness(0.7) contrast(1.1);
-            animation: bgPanZoom 20s ease-in-out infinite alternate;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #0f1c3f 0%, #070b14 100%);
         }
 
-        @keyframes bgPanZoom {
-            0% { transform: scale(1) translate(0, 0); }
-            50% { transform: scale(1.08) translate(-10px, -15px); }
-            100% { transform: scale(1.04) translate(10px, 10px); }
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(0,210,255,1) 0%, rgba(0,120,255,0.3) 60%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.8), 0 0 30px rgba(0, 210, 255, 0.4);
+            animation: floatParticle linear infinite;
+            opacity: 0.7;
         }
 
-        .ambient-light {
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(105vh) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Ambient Light Glow */
+        .ambient-glow {
             position: fixed;
-            width: 450px;
-            height: 450px;
-            background: rgba(0, 210, 255, 0.2);
-            filter: blur(130px);
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 210, 255, 0.15);
+            filter: blur(150px);
             border-radius: 50%;
             z-index: -1;
-            animation: floatOrb 10s ease-in-out infinite alternate;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseGlow 6s ease-in-out infinite alternate;
         }
 
-        @keyframes floatOrb {
-            0% { transform: translate(-50px, -50px); }
-            100% { transform: translate(120px, 160px); }
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.4; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
         }
 
         /* Stunning Animated Neon Border for Top Marquee Banner */
         .top-banner {
             position: relative;
-            background: rgba(10, 15, 29, 0.85);
+            background: rgba(10, 15, 29, 0.9);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 12px 0;
+            padding: 10px 0;
             font-size: 13px;
             font-weight: 700;
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
             letter-spacing: 1px;
-            border-top: 2px solid transparent;
-            border-bottom: 2px solid transparent;
-            background-clip: padding-box;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3), inset 0 0 15px rgba(0, 210, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
         }
 
-        /* Glowing Animated Border Wrapper */
         .top-banner::before {
             content: '';
             position: absolute;
@@ -97,7 +115,7 @@
             left: -100%;
             width: 300%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,210,255,0.8), #ff007f, rgba(0,210,255,0.8), transparent);
+            background: linear-gradient(90deg, transparent, rgba(0,210,255,0.9), #ff007f, rgba(0,210,255,0.9), transparent);
             animation: borderLightMove 4s linear infinite;
             z-index: -1;
         }
@@ -125,10 +143,10 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Container */
+        /* Main Container - Compact & Neat */
         .container {
             max-width: 480px;
-            margin: 25px auto 50px auto;
+            margin: 18px auto 35px auto;
             padding: 0 15px;
             position: relative;
             z-index: 5;
@@ -140,25 +158,25 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 2px solid var(--border-glow);
-            border-radius: 24px;
-            padding: 25px 20px 30px 20px;
-            box-shadow: 0 0 35px rgba(0, 210, 255, 0.25), inset 0 0 20px rgba(0, 210, 255, 0.1);
+            border-radius: 22px;
+            padding: 20px 18px 22px 18px;
+            box-shadow: 0 0 35px rgba(0, 210, 255, 0.25), inset 0 0 20px rgba(0, 210, 255, 0.08);
             animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
         }
 
         @keyframes cardEntrance {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            0% { opacity: 0; transform: translateY(25px) scale(0.95); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Corner LED Pulse Indicator (Titik Denyut Hijau) */
+        /* Corner LED Pulse Indicator */
         .corner-server-led {
             position: absolute;
-            top: 18px;
-            right: 20px;
-            width: 12px;
-            height: 12px;
+            top: 15px;
+            right: 18px;
+            width: 10px;
+            height: 10px;
             background-color: #00ff80;
             border-radius: 50%;
             box-shadow: 0 0 8px #00ff80, 0 0 16px #00ff80;
@@ -171,20 +189,19 @@
             50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px #00ff80, 0 0 24px #00ff80; }
         }
 
-        /* Logo styling (logo.webp) - Rapat tanpa jarak berlebih */
+        /* Logo styling - Rapat & proporsional */
         .logo-area {
             text-align: center;
-            margin-bottom: 12px;
-            margin-top: 5px;
+            margin-bottom: 6px;
+            margin-top: 2px;
         }
 
         .logo-area img {
             width: 100%;
-            max-width: 200px;
+            max-width: 190px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.5));
-            margin-bottom: 4px;
             animation: floatLogo 4s ease-in-out infinite alternate;
         }
 
@@ -195,10 +212,10 @@
 
         .subtitle {
             text-align: center;
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 15px;
+            line-height: 1.4;
             padding: 0 10px;
         }
 
@@ -213,13 +230,13 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 14px 20px;
-            border-radius: 14px;
+            padding: 13px 20px;
+            border-radius: 12px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13.5px;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
@@ -247,7 +264,7 @@
         .btn-register {
             background: linear-gradient(135deg, #00d2ff, #0052D4);
             color: white;
-            font-size: 15px;
+            font-size: 14.5px;
             border: 1px solid rgba(255,255,255,0.3);
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
         }
@@ -257,11 +274,9 @@
             box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
         }
 
-        /* WhatsApp & Telegram Stacked (Atas Bawah) Full Width */
         .btn-whatsapp {
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: white;
-            font-size: 14px;
         }
 
         .btn-whatsapp:hover {
@@ -272,7 +287,6 @@
         .btn-telegram {
             background: linear-gradient(135deg, #0088cc, #005580);
             color: white;
-            font-size: 14px;
         }
 
         .btn-telegram:hover {
@@ -280,23 +294,23 @@
             box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
         }
 
-        /* Game Categories Icon Grid */
+        /* Game Categories Icon Grid (Sabung Ayam Updated) */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin: 20px 0;
-            padding-top: 15px;
+            gap: 6px;
+            margin: 15px 0;
+            padding-top: 12px;
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
+            padding-bottom: 12px;
         }
 
         .cat-item {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(0, 210, 255, 0.15);
-            border-radius: 12px;
-            padding: 10px 4px;
+            border-radius: 10px;
+            padding: 8px 2px;
             text-align: center;
             transition: all 0.3s ease;
         }
@@ -308,41 +322,45 @@
             box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
         }
 
-        .cat-item i {
-            font-size: 18px;
+        .cat-item i, .cat-item svg {
+            font-size: 16px;
+            height: 16px;
+            width: 16px;
+            fill: var(--primary-blue);
             color: var(--primary-blue);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .cat-item span {
             display: block;
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: 500;
             color: var(--text-muted);
+            letter-spacing: -0.2px;
         }
 
         /* Accordion Menu Sections */
         .accordion-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .accordion-item {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(0, 210, 255, 0.2);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
         .accordion-header {
-            padding: 14px 16px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 210, 255, 0.05);
@@ -356,7 +374,7 @@
         .accordion-header i.fa-chevron-down {
             transition: transform 0.3s ease;
             color: var(--primary-blue);
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .accordion-item.active .accordion-header i.fa-chevron-down {
@@ -367,67 +385,68 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
-            background: rgba(10, 15, 29, 0.5);
-            font-size: 12px;
+            background: rgba(7, 11, 20, 0.6);
+            font-size: 11.5px;
             color: var(--text-muted);
-            padding: 0 16px;
-            line-height: 1.6;
+            padding: 0 14px;
+            line-height: 1.5;
         }
 
         .accordion-item.active .accordion-content {
-            max-height: 300px;
-            padding: 14px 16px;
+            max-height: 280px;
+            padding: 12px 14px;
             transition: max-height 0.4s ease-in-out;
         }
 
         .accordion-content ul {
-            padding-left: 15px;
-            margin-top: 5px;
+            padding-left: 14px;
+            margin-top: 4px;
         }
 
         .accordion-content li {
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         /* Footer Copyright */
         .footer {
             text-align: center;
-            margin-top: 20px;
-            font-size: 11px;
+            margin-top: 15px;
+            font-size: 10.5px;
             color: var(--text-muted);
             letter-spacing: 0.5px;
         }
 
         @media(max-width: 480px) {
             .container {
-                margin: 15px auto 40px auto;
+                margin: 12px auto 30px auto;
             }
             .main-card {
-                padding: 20px 15px;
+                padding: 18px 14px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-    <div class="ambient-light"></div>
+    <!-- Dynamic Blue Glowing Orbs & Particles Background Container -->
+    <div class="bg-animation-container" id="particleContainer"></div>
+    <div class="ambient-glow"></div>
 
     <!-- Top Running Marquee Banner with Stunning Animated Neon Border -->
     <div class="top-banner">
         <div class="marquee-content">
             <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
-            <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIAP HARI! 🚀</span>
+            <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIap HARI! 🚀</span>
         </div>
     </div>
 
     <div class="container">
         <div class="main-card">
             
-            <!-- Corner LED Pulse Indicator (Titik Denyut Hijau) -->
+            <!-- Corner LED Pulse Indicator -->
             <div class="corner-server-led" title="Server Online"></div>
 
-            <!-- Logo & Title (logo.webp) -->
+            <!-- Logo & Title -->
             <div class="logo-area">
                 <img src="logo.webp" alt="VICTORY39 Logo" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80'">
             </div>
@@ -442,7 +461,7 @@
                 <i class="fas fa-star"></i> DAFTAR AKUN VIP RESMI
             </a>
 
-            <!-- WhatsApp & Telegram Atas Bawah (Full Width) -->
+            <!-- WhatsApp & Telegram Buttons -->
             <a href="https://api.whatsapp.com/send/?phone=6281318485592&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-whatsapp">
                 <i class="fab fa-whatsapp"></i> WHATSAPP OFFICIAL CS
             </a>
@@ -451,7 +470,7 @@
                 <i class="fab fa-telegram-plane"></i> TELEGRAM CHANNEL & CS
             </a>
 
-            <!-- Game Categories Icon Grid -->
+            <!-- Game Categories Icon Grid (Sabung Ayam Included) -->
             <div class="category-grid">
                 <div class="cat-item">
                     <i class="fas fa-gamepad"></i>
@@ -459,15 +478,18 @@
                 </div>
                 <div class="cat-item">
                     <i class="fas fa-video"></i>
-                    <span>LIVE CASINO</span>
+                    <span>CASINO</span>
                 </div>
                 <div class="cat-item">
                     <i class="fas fa-dice"></i>
                     <span>TOTO</span>
                 </div>
-                <div class="cat-item">
-                    <i class="fas fa-fist-raised"></i>
-                    <span>ARENA</span>
+                <!-- Sabung Ayam dengan ikon kepala ayam petarung -->
+                <div class="cat-item" title="Sabung Ayam">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M224 32c-17.7 0-32 14.3-32 32v24.2C150.3 103.7 120 142.3 120 188c0 23.3 6.5 45.1 17.8 63.8L96 288l51.1 25.6C128.7 334.8 120 359.8 120 388c0 53 43 96 96 96h112c70.7 0 128-57.3 128-128 0-41.2-19.8-77.8-50.6-101.2C324.9 238.1 320 216.5 320 196c0-44.2-35.8-80-80-80V64c0-17.7-14.3-32-32-32zm32 160a32 32 0 1 0 0 64 32 32 0 1 0 0-64z"/>
+                    </svg>
+                    <span>SABUNG AYAM</span>
                 </div>
                 <div class="cat-item">
                     <i class="fas fa-fish"></i>
@@ -475,33 +497,33 @@
                 </div>
             </div>
 
-            <!-- Accordion Sections: Panduan, Fitur, & FAQ -->
+            <!-- Accordion Sections -->
             <div class="accordion-list">
 
-                <!-- Item 1: Panduan Akses & Fitur -->
+                <!-- Item 1 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-compass" style="margin-right: 8px; color: #00d2ff;"></i> PANDUAN AKSES & FITUR UTAMA</span>
+                        <span><i class="fas fa-compass" style="margin-right: 6px; color: #00d2ff;"></i> PANDUAN AKSES & FITUR UTAMA</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
                         <p>Nikmati berbagai fitur canggih di VICTORY39:</p>
                         <ul>
-                            <li><strong>Sistem Keamanan Tinggi:</strong> Enkripsi data mutakhir untuk menjaga privasi dan transaksi Anda.</li>
+                            <li><strong>Sistem Keamanan Tinggi:</strong> Enkripsi data mutakhir untuk menjaga privasi transaksi Anda.</li>
                             <li><strong>Deposit & Withdraw Kilat:</strong> Proses transaksi otomatis dan cepat kurang dari 2 menit 24/7.</li>
-                            <li><strong>Multi-Device Access:</strong> Dapat diakses dengan mulus melalui PC, Tablet, maupun Smartphone tanpa kendala.</li>
+                            <li><strong>Multi-Device Access:</strong> Dapat diakses mulus lewat PC, Tablet, maupun Smartphone.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Item 2: Member Eksklusif VIP Club -->
+                <!-- Item 2 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-crown" style="margin-right: 8px; color: #00d2ff;"></i> MEMBER EKSKLUSIF VIP CLUB</span>
+                        <span><i class="fas fa-crown" style="margin-right: 6px; color: #00d2ff;"></i> MEMBER EKSKLUSIF VIP CLUB</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
-                        <p>Keuntungan spesial bagi member setia VICTORY39:</p>
+                        <p>Keuntungan spesial bagi member setia:</p>
                         <ul>
                             <li>Bonus cashback mingguan dan komisi referral tertinggi.</li>
                             <li>Layanan prioritas VIP Customer Service 24 jam nonstop via WhatsApp & Telegram.</li>
@@ -510,15 +532,15 @@
                     </div>
                 </div>
 
-                <!-- Item 3: Pertanyaan Umum (FAQ) -->
+                <!-- Item 3 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-question-circle" style="margin-right: 8px; color: #00d2ff;"></i> PERTANYAAN UMUM (FAQ)</span>
+                        <span><i class="fas fa-question-circle" style="margin-right: 6px; color: #00d2ff;"></i> PERTANYAAN UMUM (FAQ)</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
-                        <p><strong>Q: Bagaimana cara mendaftar akun resmi?</strong><br>A: Cukup klik tombol "Daftar Akun VIP Resmi" dan isi formulir pendaftaran dengan data yang valid.</p>
-                        <p style="margin-top: 8px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami melalui WhatsApp atau Telegram resmi untuk bantuan pemulihan instan.</p>
+                        <p><strong>Q: Bagaimana cara mendaftar akun resmi?</strong><br>A: Klik tombol "Daftar Akun VIP Resmi" dan isi formulir pendaftaran dengan data valid.</p>
+                        <p style="margin-top: 6px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami via WhatsApp atau Telegram resmi untuk pemulihan instan.</p>
                     </div>
                 </div>
 
@@ -533,6 +555,31 @@
     </div>
 
     <script>
+        // Generate dynamic floating blue glowing particles/orbs in background
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById('particleContainer');
+            const particleCount = 25;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random positioning and sizing
+                const size = Math.random() * 12 + 4; // 4px to 16px
+                const leftPos = Math.random() * 100; // 0% to 100%
+                const animDuration = Math.random() * 8 + 6; // 6s to 14s
+                const animDelay = Math.random() * 5; // 0s to 5s
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${leftPos}%`;
+                particle.style.animationDuration = `${animDuration}s`;
+                particle.style.animationDelay = `${animDelay}s`;
+
+                container.appendChild(particle);
+            }
+        });
+
         function toggleAccordion(header) {
             const item = header.parentElement;
             const allItems = document.querySelectorAll('.accordion-item');
