@@ -13,8 +13,8 @@
             --primary-blue: #00d2ff;
             --secondary-blue: #3a7bd5;
             --dark-bg: #070b14;
-            --card-bg: rgba(11, 17, 32, 0.92);
-            --border-glow: rgba(0, 210, 255, 0.45);
+            --card-bg: rgba(11, 17, 32, 0.90);
+            --border-glow: rgba(0, 210, 255, 0.5);
             --text-color: #ffffff;
             --text-muted: #94a3b8;
         }
@@ -34,90 +34,86 @@
             position: relative;
         }
 
-        /* Dynamic Blue Glowing Orbs & Particles Background Animation */
-        .bg-animation-container {
+        /* Original Image Background with Motion + Blue Particles Overlay */
+        .bg-image-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('background.webp') no-repeat center center/cover;
+            z-index: -3;
+            filter: brightness(0.75) contrast(1.1);
+            animation: bgZoom 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
+        }
+
+        .bg-particles-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            overflow: hidden;
-            background: radial-gradient(circle at center, #0f1c3f 0%, #070b14 100%);
+            pointer-events: none;
         }
 
         .particle {
             position: absolute;
-            background: radial-gradient(circle, rgba(0,210,255,1) 0%, rgba(0,120,255,0.3) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(0,210,255,1) 0%, rgba(0,120,255,0.4) 60%, transparent 100%);
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.8), 0 0 30px rgba(0, 210, 255, 0.4);
+            box-shadow: 0 0 15px #00d2ff, 0 0 30px rgba(0,210,255,0.8);
             animation: floatParticle linear infinite;
-            opacity: 0.7;
+            opacity: 0.85;
         }
 
         @keyframes floatParticle {
             0% {
-                transform: translateY(105vh) scale(0.5);
+                transform: translateY(105vh) scale(0.6);
                 opacity: 0;
             }
-            20% {
-                opacity: 0.8;
-            }
-            80% {
-                opacity: 0.8;
-            }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.9; }
             100% {
-                transform: translateY(-10vh) scale(1.2);
+                transform: translateY(-10vh) scale(1.3);
                 opacity: 0;
             }
         }
 
-        /* Ambient Light Glow */
-        .ambient-glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: rgba(0, 210, 255, 0.15);
-            filter: blur(150px);
-            border-radius: 50%;
-            z-index: -1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulseGlow 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.4; }
-            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-        }
-
-        /* Stunning Animated Neon Border for Top Marquee Banner */
+        /* Super Visible & Stunning Animated Neon Border for Top Banner */
         .top-banner {
             position: relative;
-            background: rgba(10, 15, 29, 0.9);
+            background: rgba(8, 14, 28, 0.95);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 10px 0;
+            padding: 12px 0;
             font-size: 13px;
             font-weight: 700;
             overflow: hidden;
             white-space: nowrap;
             z-index: 10;
             letter-spacing: 1px;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+            border-top: 3px solid #00d2ff;
+            border-bottom: 3px solid #00d2ff;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.8), inset 0 0 15px rgba(0, 210, 255, 0.4);
         }
 
         .top-banner::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -2px;
             left: -100%;
             width: 300%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,210,255,0.9), #ff007f, rgba(0,210,255,0.9), transparent);
-            animation: borderLightMove 4s linear infinite;
-            z-index: -1;
+            height: calc(100% + 4px);
+            background: linear-gradient(90deg, transparent, rgba(0,210,255,1), #ff007f, #00ffcc, rgba(0,210,255,1), transparent);
+            animation: borderLightMove 3s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.9;
         }
 
         @keyframes borderLightMove {
@@ -128,6 +124,8 @@
         .marquee-content {
             display: inline-block;
             animation: marquee 25s linear infinite;
+            position: relative;
+            z-index: 2;
         }
 
         .marquee-content span {
@@ -135,7 +133,7 @@
             background: linear-gradient(135deg, #00d2ff, #ffffff, #ff7eee);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
         }
 
         @keyframes marquee {
@@ -143,10 +141,10 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Main Container - Compact & Neat */
+        /* Main Container - Tightened spacing */
         .container {
             max-width: 480px;
-            margin: 18px auto 35px auto;
+            margin: 15px auto 30px auto;
             padding: 0 15px;
             position: relative;
             z-index: 5;
@@ -158,23 +156,23 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 2px solid var(--border-glow);
-            border-radius: 22px;
-            padding: 20px 18px 22px 18px;
-            box-shadow: 0 0 35px rgba(0, 210, 255, 0.25), inset 0 0 20px rgba(0, 210, 255, 0.08);
+            border-radius: 20px;
+            padding: 16px 16px 20px 16px;
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.3), inset 0 0 20px rgba(0, 210, 255, 0.1);
             animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
         }
 
         @keyframes cardEntrance {
-            0% { opacity: 0; transform: translateY(25px) scale(0.95); }
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Corner LED Pulse Indicator */
         .corner-server-led {
             position: absolute;
-            top: 15px;
-            right: 18px;
+            top: 14px;
+            right: 16px;
             width: 10px;
             height: 10px;
             background-color: #00ff80;
@@ -189,33 +187,33 @@
             50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px #00ff80, 0 0 24px #00ff80; }
         }
 
-        /* Logo styling - Rapat & proporsional */
+        /* Logo styling - Rapat tanpa jarak kosong berlebih ke teks */
         .logo-area {
             text-align: center;
-            margin-bottom: 6px;
-            margin-top: 2px;
+            margin-bottom: 2px;
+            margin-top: 0px;
         }
 
         .logo-area img {
             width: 100%;
-            max-width: 190px;
+            max-width: 175px;
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.5));
+            filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.6));
             animation: floatLogo 4s ease-in-out infinite alternate;
         }
 
         @keyframes floatLogo {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-4px); }
+            100% { transform: translateY(-3px); }
         }
 
         .subtitle {
             text-align: center;
-            font-size: 11.5px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 15px;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            line-height: 1.3;
             padding: 0 10px;
         }
 
@@ -230,7 +228,7 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 13px 20px;
+            padding: 12px 20px;
             border-radius: 12px;
             font-weight: 700;
             font-size: 13.5px;
@@ -294,16 +292,16 @@
             box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
         }
 
-        /* Game Categories Icon Grid (Sabung Ayam Updated) */
+        /* Game Categories Icon Grid (Sabung Ayam) */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 6px;
-            margin: 15px 0;
-            padding-top: 12px;
+            margin: 12px 0;
+            padding-top: 10px;
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .cat-item {
@@ -323,17 +321,17 @@
         }
 
         .cat-item i, .cat-item svg {
-            font-size: 16px;
-            height: 16px;
-            width: 16px;
+            font-size: 15px;
+            height: 15px;
+            width: 15px;
             fill: var(--primary-blue);
             color: var(--primary-blue);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .cat-item span {
             display: block;
-            font-size: 9.5px;
+            font-size: 9px;
             font-weight: 500;
             color: var(--text-muted);
             letter-spacing: -0.2px;
@@ -343,24 +341,24 @@
         .accordion-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .accordion-item {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(0, 210, 255, 0.2);
-            border-radius: 10px;
+            border-radius: 9px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
         .accordion-header {
-            padding: 12px 14px;
+            padding: 10px 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 600;
             color: #ffffff;
             background: rgba(0, 210, 255, 0.05);
@@ -374,7 +372,7 @@
         .accordion-header i.fa-chevron-down {
             transition: transform 0.3s ease;
             color: var(--primary-blue);
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .accordion-item.active .accordion-header i.fa-chevron-down {
@@ -386,57 +384,57 @@
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
             background: rgba(7, 11, 20, 0.6);
-            font-size: 11.5px;
+            font-size: 11px;
             color: var(--text-muted);
-            padding: 0 14px;
-            line-height: 1.5;
+            padding: 0 12px;
+            line-height: 1.4;
         }
 
         .accordion-item.active .accordion-content {
-            max-height: 280px;
-            padding: 12px 14px;
+            max-height: 250px;
+            padding: 10px 12px;
             transition: max-height 0.4s ease-in-out;
         }
 
         .accordion-content ul {
-            padding-left: 14px;
-            margin-top: 4px;
+            padding-left: 12px;
+            margin-top: 3px;
         }
 
         .accordion-content li {
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         /* Footer Copyright */
         .footer {
             text-align: center;
-            margin-top: 15px;
-            font-size: 10.5px;
+            margin-top: 12px;
+            font-size: 10px;
             color: var(--text-muted);
             letter-spacing: 0.5px;
         }
 
         @media(max-width: 480px) {
             .container {
-                margin: 12px auto 30px auto;
+                margin: 10px auto 25px auto;
             }
             .main-card {
-                padding: 18px 14px;
+                padding: 14px 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Blue Glowing Orbs & Particles Background Container -->
-    <div class="bg-animation-container" id="particleContainer"></div>
-    <div class="ambient-glow"></div>
+    <!-- Background Image & Floating Blue Particles Layer -->
+    <div class="bg-image-layer"></div>
+    <div class="bg-particles-container" id="particleContainer"></div>
 
-    <!-- Top Running Marquee Banner with Stunning Animated Neon Border -->
+    <!-- Top Running Marquee Banner with Highly Visible Animated Neon Border -->
     <div class="top-banner">
         <div class="marquee-content">
             <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
-            <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIap HARI! 🚀</span>
+            <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIAP HARI! 🚀</span>
         </div>
     </div>
 
@@ -484,7 +482,7 @@
                     <i class="fas fa-dice"></i>
                     <span>TOTO</span>
                 </div>
-                <!-- Sabung Ayam dengan ikon kepala ayam petarung -->
+                <!-- Sabung Ayam Ikon Ayam -->
                 <div class="cat-item" title="Sabung Ayam">
                     <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                         <path d="M224 32c-17.7 0-32 14.3-32 32v24.2C150.3 103.7 120 142.3 120 188c0 23.3 6.5 45.1 17.8 63.8L96 288l51.1 25.6C128.7 334.8 120 359.8 120 388c0 53 43 96 96 96h112c70.7 0 128-57.3 128-128 0-41.2-19.8-77.8-50.6-101.2C324.9 238.1 320 216.5 320 196c0-44.2-35.8-80-80-80V64c0-17.7-14.3-32-32-32zm32 160a32 32 0 1 0 0 64 32 32 0 1 0 0-64z"/>
@@ -503,7 +501,7 @@
                 <!-- Item 1 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-compass" style="margin-right: 6px; color: #00d2ff;"></i> PANDUAN AKSES & FITUR UTAMA</span>
+                        <span><i class="fas fa-compass" style="margin-right: 5px; color: #00d2ff;"></i> PANDUAN AKSES & FITUR UTAMA</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
@@ -519,7 +517,7 @@
                 <!-- Item 2 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-crown" style="margin-right: 6px; color: #00d2ff;"></i> MEMBER EKSKLUSIF VIP CLUB</span>
+                        <span><i class="fas fa-crown" style="margin-right: 5px; color: #00d2ff;"></i> MEMBER EKSKLUSIF VIP CLUB</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
@@ -535,12 +533,12 @@
                 <!-- Item 3 -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-question-circle" style="margin-right: 6px; color: #00d2ff;"></i> PERTANYAAN UMUM (FAQ)</span>
+                        <span><i class="fas fa-question-circle" style="margin-right: 5px; color: #00d2ff;"></i> PERTANYAAN UMUM (FAQ)</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="accordion-content">
                         <p><strong>Q: Bagaimana cara mendaftar akun resmi?</strong><br>A: Klik tombol "Daftar Akun VIP Resmi" dan isi formulir pendaftaran dengan data valid.</p>
-                        <p style="margin-top: 6px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami via WhatsApp atau Telegram resmi untuk pemulihan instan.</p>
+                        <p style="margin-top: 4px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami via WhatsApp atau Telegram resmi untuk pemulihan instan.</p>
                     </div>
                 </div>
 
@@ -555,19 +553,18 @@
     </div>
 
     <script>
-        // Generate dynamic floating blue glowing particles/orbs in background
+        // Generate dynamic floating blue glowing particles/orbs over background
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.getElementById('particleContainer');
-            const particleCount = 25;
+            const particleCount = 28;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Random positioning and sizing
-                const size = Math.random() * 12 + 4; // 4px to 16px
+                const size = Math.random() * 14 + 5; // 5px to 19px
                 const leftPos = Math.random() * 100; // 0% to 100%
-                const animDuration = Math.random() * 8 + 6; // 6s to 14s
+                const animDuration = Math.random() * 7 + 5; // 5s to 12s
                 const animDelay = Math.random() * 5; // 0s to 5s
 
                 particle.style.width = `${size}px`;
