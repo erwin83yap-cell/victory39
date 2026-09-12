@@ -31,29 +31,35 @@
             color: var(--text-color);
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 20%, #1a2c56 0%, var(--dark-bg) 70%);
             position: relative;
         }
 
-        /* Animated background / background.webp */
+        /* Animated Background with panning/zooming motion */
         .bg-glow {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: url('background.webp') no-repeat center center/cover;
-            opacity: 0.25;
-            z-index: -1;
-            filter: brightness(0.7);
+            opacity: 0.35;
+            z-index: -2;
+            filter: brightness(0.7) contrast(1.1);
+            animation: bgPanZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPanZoom {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.08) translate(-10px, -15px); }
+            100% { transform: scale(1.04) translate(10px, 10px); }
         }
 
         .ambient-light {
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: rgba(0, 210, 255, 0.15);
-            filter: blur(120px);
+            width: 450px;
+            height: 450px;
+            background: rgba(0, 210, 255, 0.2);
+            filter: blur(130px);
             border-radius: 50%;
             z-index: -1;
             animation: floatOrb 10s ease-in-out infinite alternate;
@@ -61,31 +67,44 @@
 
         @keyframes floatOrb {
             0% { transform: translate(-50px, -50px); }
-            100% { transform: translate(100px, 150px); }
+            100% { transform: translate(120px, 160px); }
         }
 
-        /* Running Top Marquee Banner (1 Baris Berjalan Terus) */
+        /* Stunning Animated Neon Border for Top Marquee Banner */
         .top-banner {
-            background: linear-gradient(90deg, #0052D4, #00d2ff, #4364F7);
-            background-size: 200% 200%;
-            animation: gradientShift 5s ease infinite;
+            position: relative;
+            background: rgba(10, 15, 29, 0.85);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 12px 0;
             font-size: 13px;
             font-weight: 700;
             overflow: hidden;
             white-space: nowrap;
-            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
-            position: relative;
             z-index: 10;
             letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3), inset 0 0 15px rgba(0, 210, 255, 0.1);
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Glowing Animated Border Wrapper */
+        .top-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,210,255,0.8), #ff007f, rgba(0,210,255,0.8), transparent);
+            animation: borderLightMove 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes borderLightMove {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(50%); }
         }
 
         .marquee-content {
@@ -95,7 +114,10 @@
 
         .marquee-content span {
             margin-right: 50px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, #00d2ff, #ffffff, #ff7eee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
         }
 
         @keyframes marquee {
@@ -106,7 +128,7 @@
         /* Main Container */
         .container {
             max-width: 480px;
-            margin: 30px auto 50px auto;
+            margin: 25px auto 50px auto;
             padding: 0 15px;
             position: relative;
             z-index: 5;
@@ -119,7 +141,7 @@
             -webkit-backdrop-filter: blur(16px);
             border: 2px solid var(--border-glow);
             border-radius: 24px;
-            padding: 30px 20px;
+            padding: 25px 20px 30px 20px;
             box-shadow: 0 0 35px rgba(0, 210, 255, 0.25), inset 0 0 20px rgba(0, 210, 255, 0.1);
             animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
@@ -130,7 +152,7 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Corner LED Pulse Indicator (Hanya Titik Hijau Denyut di Pojok) */
+        /* Corner LED Pulse Indicator (Titik Denyut Hijau) */
         .corner-server-led {
             position: absolute;
             top: 18px;
@@ -149,20 +171,20 @@
             50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 14px #00ff80, 0 0 24px #00ff80; }
         }
 
-        /* Logo styling (logo.webp) - Adjusted for rectangular logo */
+        /* Logo styling (logo.webp) - Rapat tanpa jarak berlebih */
         .logo-area {
             text-align: center;
-            margin-bottom: 20px;
-            margin-top: 10px;
+            margin-bottom: 12px;
+            margin-top: 5px;
         }
 
         .logo-area img {
             width: 100%;
-            max-width: 220px;
+            max-width: 200px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.5));
-            margin-bottom: 10px;
+            margin-bottom: 4px;
             animation: floatLogo 4s ease-in-out infinite alternate;
         }
 
@@ -171,22 +193,11 @@
             100% { transform: translateY(-4px); }
         }
 
-        .logo-area h1 {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #00d2ff, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-            display: none;
-        }
-
         .subtitle {
             text-align: center;
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.5;
             padding: 0 10px;
         }
@@ -274,7 +285,7 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 8px;
-            margin: 25px 0;
+            margin: 20px 0;
             padding-top: 15px;
             border-top: 1px solid rgba(255,255,255,0.1);
             border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -381,7 +392,7 @@
         /* Footer Copyright */
         .footer {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 11px;
             color: var(--text-muted);
             letter-spacing: 0.5px;
@@ -402,7 +413,7 @@
     <div class="bg-glow"></div>
     <div class="ambient-light"></div>
 
-    <!-- Top Running Marquee Banner (1 Baris Berjalan Terus) -->
+    <!-- Top Running Marquee Banner with Stunning Animated Neon Border -->
     <div class="top-banner">
         <div class="marquee-content">
             <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
@@ -413,13 +424,12 @@
     <div class="container">
         <div class="main-card">
             
-            <!-- Corner LED Pulse Indicator (Hanya Titik Denyut Hijau di Pojok Kanan Atas) -->
+            <!-- Corner LED Pulse Indicator (Titik Denyut Hijau) -->
             <div class="corner-server-led" title="Server Online"></div>
 
             <!-- Logo & Title (logo.webp) -->
             <div class="logo-area">
                 <img src="logo.webp" alt="VICTORY39 Logo" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80'">
-                <h1>VICTORY39</h1>
             </div>
 
             <div class="subtitle">
