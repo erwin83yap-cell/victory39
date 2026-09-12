@@ -64,28 +64,43 @@
             100% { transform: translate(100px, 150px); }
         }
 
-        /* Running top marquee banner */
+        /* Running Top Marquee Banner (1 Baris Berjalan Terus) */
         .top-banner {
-            background: linear-gradient(90deg, #0052D4, #4364F7, #6FB1FC);
+            background: linear-gradient(90deg, #0052D4, #00d2ff, #4364F7);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
             color: white;
-            padding: 10px 0;
+            padding: 12px 0;
             font-size: 13px;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 82, 212, 0.4);
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.4);
             position: relative;
             z-index: 10;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .top-banner span {
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .marquee-content {
             display: inline-block;
-            animation: pulseBanner 2s infinite;
+            animation: marquee 25s linear infinite;
         }
 
-        @keyframes pulseBanner {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .marquee-content span {
+            margin-right: 50px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* Main Container */
@@ -242,17 +257,11 @@
             box-shadow: 0 0 35px rgba(0, 210, 255, 0.7);
         }
 
-        .social-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
+        /* WhatsApp & Telegram Stacked (Atas Bawah) Full Width */
         .btn-whatsapp {
             background: linear-gradient(135deg, #25d366, #128c7e);
             color: white;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .btn-whatsapp:hover {
@@ -263,23 +272,12 @@
         .btn-telegram {
             background: linear-gradient(135deg, #0088cc, #005580);
             color: white;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .btn-telegram:hover {
             transform: translateY(-2px);
             box-shadow: 0 0 20px rgba(0, 136, 204, 0.5);
-        }
-
-        .btn-apk {
-            background: linear-gradient(135deg, #8a2be2, #4b0082);
-            color: white;
-            font-size: 13px;
-        }
-
-        .btn-apk:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
         }
 
         /* Game Categories Icon Grid */
@@ -400,38 +398,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Floating Widgets for quick chat */
-        .floating-contact {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 99;
-        }
-
-        .float-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .float-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .float-wa { background: #25d366; }
-        .float-tg { background: #0088cc; }
-
         @media(max-width: 480px) {
             .container {
                 margin: 15px auto 40px auto;
@@ -447,9 +413,12 @@
     <div class="bg-glow"></div>
     <div class="ambient-light"></div>
 
-    <!-- Top Running Banner -->
+    <!-- Top Running Marquee Banner (1 Baris Berjalan Terus) -->
     <div class="top-banner">
-        <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
+        <div class="marquee-content">
+            <span>⭐ SELAMAT DATANG DI VICTORY39 - SITUS RESMI & LINK LOGIN VIP TERPERCAYA! PROSES DEPO & WITHDRAW KILAT 24 JAM NONSTOP! ⭐</span>
+            <span>🚀 NIKMATI BERBAGAI PERMAINAN SERU DENGAN BONUS & KEMENANGAN TINGGI SETIAP HARI! 🚀</span>
+        </div>
     </div>
 
     <div class="container">
@@ -478,20 +447,16 @@
                 <i class="fas fa-star"></i> DAFTAR AKUN VIP RESMI
             </a>
 
-            <div class="social-group">
-                <a href="https://api.whatsapp.com/send/?phone=6281318485592&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-whatsapp">
-                    <i class="fab fa-whatsapp"></i> WHATSAPP
-                </a>
-                <a href="https://t.me/Victory39cs" target="_blank" class="btn btn-telegram">
-                    <i class="fab fa-telegram-plane"></i> TELEGRAM
-                </a>
-            </div>
-
-            <a href="#download" class="btn btn-apk" onclick="alert('Silakan hubungi Livechat / CS untuk mendownload APK resmi VICTORY39 terbaru.')">
-                <i class="fas fa-download"></i> DOWNLOAD APK ANDROID
+            <!-- WhatsApp & Telegram Atas Bawah (Full Width) -->
+            <a href="https://api.whatsapp.com/send/?phone=6281318485592&text&type=phone_number&app_absent=0" target="_blank" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> WHATSAPP OFFICIAL CS
+            </a>
+            
+            <a href="https://t.me/Victory39cs" target="_blank" class="btn btn-telegram">
+                <i class="fab fa-telegram-plane"></i> TELEGRAM CHANNEL & CS
             </a>
 
-            <!-- Game Categories Icon Grid -->
+            <!-- Game Categories Icon Grid (Sabung Ayam diganti ikon Tanding/Arena fa-fist-raised) -->
             <div class="category-grid">
                 <div class="cat-item">
                     <i class="fas fa-gamepad"></i>
@@ -506,8 +471,8 @@
                     <span>TOTO</span>
                 </div>
                 <div class="cat-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>SABUNG AYAM</span>
+                    <i class="fas fa-fist-raised"></i>
+                    <span>ARENA</span>
                 </div>
                 <div class="cat-item">
                     <i class="fas fa-fish"></i>
@@ -515,27 +480,10 @@
                 </div>
             </div>
 
-            <!-- Accordion Sections: Panduan, Fitur, & FAQ -->
+            <!-- Accordion Sections: Panduan, Fitur, & FAQ (Tanpa Cara Instal) -->
             <div class="accordion-list">
 
-                <!-- Item 1: Cara Instal App -->
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span><i class="fas fa-mobile-alt" style="margin-right: 8px; color: #00d2ff;"></i> CARA INSTAL APLIKASI VICTORY39</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <p>Panduan pemasangan aplikasi mobile VICTORY39:</p>
-                        <ul>
-                            <li>Klik tombol 'Download APK Android' di atas.</li>
-                            <li>Izinkan instalasi dari sumber tidak dikenal di pengaturan perangkat Anda.</li>
-                            <li>Buka file APK yang telah diunduh dan ikuti instruksi hingga selesai.</li>
-                            <li>Login menggunakan akun VIP Anda yang terdaftar.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Item 2: Panduan Akses & Fitur -->
+                <!-- Item 1: Panduan Akses & Fitur -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span><i class="fas fa-compass" style="margin-right: 8px; color: #00d2ff;"></i> PANDUAN AKSES & FITUR UTAMA</span>
@@ -551,7 +499,7 @@
                     </div>
                 </div>
 
-                <!-- Item 3: Member Eksklusif VIP Club -->
+                <!-- Item 2: Member Eksklusif VIP Club -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span><i class="fas fa-crown" style="margin-right: 8px; color: #00d2ff;"></i> MEMBER EKSKLUSIF VIP CLUB</span>
@@ -567,7 +515,7 @@
                     </div>
                 </div>
 
-                <!-- Item 4: Pertanyaan Umum (FAQ) -->
+                <!-- Item 3: Pertanyaan Umum (FAQ) -->
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span><i class="fas fa-question-circle" style="margin-right: 8px; color: #00d2ff;"></i> PERTANYAAN UMUM (FAQ)</span>
@@ -575,7 +523,7 @@
                     </div>
                     <div class="accordion-content">
                         <p><strong>Q: Bagaimana cara mendaftar akun resmi?</strong><br>A: Cukup klik tombol "Daftar Akun VIP Resmi" dan isi formulir pendaftaran dengan data yang valid.</p>
-                        <p style="margin-top: 8px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami melalui Livechat, WhatsApp, atau Telegram resmi untuk bantuan pemulihan instan.</p>
+                        <p style="margin-top: 8px;"><strong>Q: Apa yang harus dilakukan jika lupa kata sandi?</strong><br>A: Hubungi Customer Service kami melalui WhatsApp atau Telegram resmi untuk bantuan pemulihan instan.</p>
                     </div>
                 </div>
 
@@ -587,16 +535,6 @@
             </div>
 
         </div>
-    </div>
-
-    <!-- Floating Quick Buttons -->
-    <div class="floating-contact">
-        <a href="https://api.whatsapp.com/send/?phone=6281318485592&text&type=phone_number&app_absent=0" target="_blank" class="float-btn float-wa" title="WhatsApp CS">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://t.me/Victory39cs" target="_blank" class="float-btn float-tg" title="Telegram CS">
-            <i class="fab fa-telegram-plane"></i>
-        </a>
     </div>
 
     <script>
