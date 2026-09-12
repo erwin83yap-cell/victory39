@@ -34,7 +34,7 @@
             position: relative;
         }
 
-        /* Original Image Background with Motion + Blue Particles Overlay */
+        /* Original Image Background with Darker Filter + Motion + Blue Particles Overlay */
         .bg-image-layer {
             position: fixed;
             top: 0;
@@ -43,7 +43,7 @@
             height: 100%;
             background: url('background.webp') no-repeat center center/cover;
             z-index: -3;
-            filter: brightness(0.75) contrast(1.1);
+            filter: brightness(0.55) contrast(1.15); /* Dibuat lebih gelap dari sebelumnya */
             animation: bgZoom 25s ease-in-out infinite alternate;
         }
 
@@ -84,7 +84,7 @@
             }
         }
 
-        /* Sleek, Elegant, and Subtle Top Banner (Not Overly Flashy) */
+        /* Sleek, Elegant, and Subtle Top Banner */
         .top-banner {
             position: relative;
             background: linear-gradient(90deg, rgba(8, 14, 28, 0.75), rgba(15, 23, 42, 0.85), rgba(8, 14, 28, 0.75));
